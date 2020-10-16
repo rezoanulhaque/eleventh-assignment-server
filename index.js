@@ -54,7 +54,7 @@ client.connect(err => {
         })
         app.post('/anonymousReview', (req, res) => {
             const review = req.body;
-            userReviewCollection.insertOne(review)
+            anonymusCollection.insertOne(review)
             .then(result => {
                 res.send(result.insertedCount>0)
             })
