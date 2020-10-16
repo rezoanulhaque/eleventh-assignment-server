@@ -75,8 +75,6 @@ client.connect(err => {
                         res.send(result.insertedCount>0)
                     })
                 })
-            })
-        })
   });
 app.get('/', (req, res) => {
     res.send('Hello World!')
