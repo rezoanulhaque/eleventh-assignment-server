@@ -20,6 +20,7 @@ client.connect(err => {
     const userOrderCollection = client.db("eleventhAssignment").collection("userOrder");
     const serviceListCollection = client.db("eleventhAssignment").collection("serviceList");
     const anonymusCollection = client.db("eleventhAssignment").collection("anonymusList");
+    const adminCollection = client.db("eleventhAssignment").collection("adminUser");
        app.post('/adduserorder', (req, res) => {
            const userOrder = req.body;
            userOrderCollection.insertOne(userOrder)
@@ -27,6 +28,18 @@ client.connect(err => {
                res.send(result.insertedCount>0)
            })
        })
+       app.post('/addAdmin', (req, res) => {
+        const addAdmin = req.body;
+        userOrderCollection.insertOne(addAdmin)
+        .then(result => {
+            res.send(result.insertedCount>0)
+        })
+    })
+    app.get('/admin', (req, res) => {
+        const userEmail = req.query.email;
+        adminCollection.find({ email: userEmail })
+            .toArray((err, documents) => res.send(documents))
+    })
        app.get('/userOrder', (req, res) => {
         userOrderCollection.find({email: req.query.email})
         .toArray((err, documents) => {
